@@ -182,7 +182,9 @@ This project is an inference application leveraging pre-trained foundation model
 - **Broader Language Support:** Expand the language map to utilize more of the 200 languages supported by the NLLB model.
 
 ## 17. Contributors
-- [Your Name/Handle]
+
+- Hafiza Amna Naseem — Developer / Project Author
 
 ## 18. GitHub Repository Link
-[Insert Repository Link Here]
+
+[AI Voice Translation Assistant - GitHub Repository](https://github.com/Hafiza-Amna/AI-Voice-Translation-Assistant)

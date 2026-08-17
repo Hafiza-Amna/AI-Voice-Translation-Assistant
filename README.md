@@ -232,10 +232,12 @@ During development and integration, several challenges were root-caused and reso
 - Streamlit microphone recording reliability is dependent on strict browser environment permissions (HTTPS/localhost).
 
 ## 23. Contributors
-- [Your Name/Handle]
+
+- Hafiza Amna Naseem — Developer / Project Author
 
 ## 24. GitHub Repository
-[Insert Repository Link Here]
+
+[AI Voice Translation Assistant - GitHub Repository](https://github.com/Hafiza-Amna/AI-Voice-Translation-Assistant)
 
 ## 25. Project Status
 **MVP Implemented and Verified.**
