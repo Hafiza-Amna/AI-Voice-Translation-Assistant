@@ -1,0 +1,50 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+
+# Environment configuration
+.env
+.env.*
+
+# Audio temporary files & logs
+audio_temp/
+generated_audio/
+*.log
+!jfk.wav
+# Ignore temporary / generated audio but keep sample audio
+*tts*.wav
+*tts*.mp3
+recording.wav
+
+# Test output json files
+e2e_results.json
+audio_api_result.json
+text_translate_result.json
+client_output.json
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Downloaded Model Cache
+models/
+huggingface/
+whisper_models/
+piper_models/
+.cache/

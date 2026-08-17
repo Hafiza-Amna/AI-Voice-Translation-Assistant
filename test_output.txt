@@ -1,0 +1,10 @@
+File: silent.wav
+Size: 32044 bytes
+
+--- STT Transcription ---
+STT TEXT: ''
+STT LANGUAGE: en
+
+--- Text Translation ---
+TRANSLATION INPUT: ''
+TRANSLATION OUTPUT: ''
