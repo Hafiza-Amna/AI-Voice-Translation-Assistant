@@ -203,7 +203,17 @@ st.markdown(
 # ─────────────────────────────────────────────────────────────────────────────
 # Constants
 # ─────────────────────────────────────────────────────────────────────────────
-BACKEND_URL: str = os.getenv("FASTAPI_URL", "http://127.0.0.1:8000")
+def _get_backend_url() -> str:
+    # 1. Try Streamlit Secrets (for Streamlit Community Cloud)
+    if "FASTAPI_URL" in st.secrets:
+        return st.secrets["FASTAPI_URL"]
+    # 2. Try OS environment variable (for local Docker or other setups)
+    if os.getenv("FASTAPI_URL"):
+        return os.environ["FASTAPI_URL"]
+    # 3. Fallback to localhost for local development
+    return "http://127.0.0.1:8000"
+
+BACKEND_URL: str = _get_backend_url()
 
 LANGS: dict[str, str] = {"Urdu 🇵🇰": "ur", "English 🇬🇧": "en"}
 LANG_LABELS: dict[str, str] = {"ur": "Urdu 🇵🇰", "en": "English 🇬🇧"}

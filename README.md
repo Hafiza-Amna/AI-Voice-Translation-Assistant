@@ -89,11 +89,18 @@ AI-Voice-Translation-Assistant/
 ├── audio_temp/                     # Temp storage for uploads
 ├── generated_audio/                # Temp storage for TTS output
 ├── pytest.ini                      # Pytest config
-├── requirements.txt                # Dependencies
+├── requirements.txt                # Backend dependencies
+├── requirements-frontend.txt       # Frontend dependencies (Streamlit Cloud)
+├── Dockerfile                      # Production Dockerfile for backend
 └── README.md                       # Project Documentation
 ```
 
-## 9. Installation & Setup
+## 9. Deployment Setup (Preparation)
+The repository is prepared for deployment:
+1. **Frontend:** Deploys easily on Streamlit Community Cloud using `requirements-frontend.txt`.
+2. **Backend:** Deploys via Docker (e.g., on Hugging Face Spaces or Render) using the provided `Dockerfile` which installs OS-level dependencies like `ffmpeg`.
+
+## 10. Installation & Setup
 
 1. **Clone the repository:**
    ```bash

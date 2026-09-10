@@ -65,12 +65,18 @@ AI-Voice-Translation-Assistant/
 ├── screenshots/                    # UI screenshots for documentation
 ├── audio_temp/                     # Temporary directory for audio uploads
 ├── generated_audio/                # Temporary directory for TTS output
-├── requirements.txt                # Python package dependencies
+├── requirements.txt                # Backend Python dependencies
+├── requirements-frontend.txt       # Frontend Python dependencies (Streamlit Cloud)
+├── Dockerfile                      # Production backend Docker configuration
 ├── .env.example                    # Template for environment variables
 └── README.md / Documentation.md    # Project documentation files
 ```
 
-## 8. Installation and Setup Guide
+## 8. Deployment Architecture (Preparation)
+- **Frontend (Streamlit Community Cloud):** Designed to deploy using `requirements-frontend.txt` and uses Streamlit Secrets for the `FASTAPI_URL`.
+- **Backend (Docker Container):** Requires a Docker-compatible hosting environment with at least 2GB RAM to support the ML models. The included `Dockerfile` correctly installs system-level `ffmpeg` alongside Python dependencies.
+
+## 9. Installation and Setup Guide
 1. **Clone the repository:**
    ```bash
    git clone <repo_url>
