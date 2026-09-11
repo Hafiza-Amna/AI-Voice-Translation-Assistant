@@ -1,7 +1,7 @@
-gradio>=4.0.0
+gradio>=6.0.0
 spaces
 torch
-transformers
+transformers>=4.35.0
+accelerate
+sentencepiece
 gtts
-librosa
-soundfile

@@ -165,7 +165,7 @@ with gr.Blocks(title="AI Voice Translation Assistant") as demo:
             label="Source Language",
             scale=1
         )
-        gr.HTML("<div style='text-align:center;padding-top:2rem;font-size:1.3rem;color:#64748b'>⇄</div>", scale=0)
+        gr.HTML("<div style='text-align:center;padding-top:2rem;font-size:1.3rem;color:#64748b;min-width:2rem'>⇄</div>")
         target_lang = gr.Dropdown(
             choices=[("Urdu 🇵🇰", "ur"), ("English 🇬🇧", "en")],
             value="en",
@@ -228,6 +228,8 @@ with gr.Blocks(title="AI Voice Translation Assistant") as demo:
         queue=False
     )
 
+# On Hugging Face Spaces, the runtime runs `python app.py` directly,
+# so __name__ == "__main__" is True and this block executes normally.
+# The css kwarg in launch() is required for Gradio 6.x custom styling.
 if __name__ == "__main__":
-    demo.queue().launch(share=False, css=custom_css)
-
+    demo.queue().launch(css=custom_css)
