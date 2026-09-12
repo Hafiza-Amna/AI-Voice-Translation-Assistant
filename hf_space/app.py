@@ -111,7 +111,7 @@ def user_message(text, audio_path, history):
         history.append({"role": "user", "content": gr.FileData(path=audio_path)})
     elif text:
         history.append({"role": "user", "content": text})
-    return gr.update(value="", interactive=False), history
+    return history
 
 def bot_response(text, audio_path, source_lang, target_lang, history):
     if not text and not audio_path:
@@ -199,32 +199,32 @@ with gr.Blocks(title="AI Voice Translation Assistant") as demo:
     text_input.submit(
         fn=user_message,
         inputs=[text_input, audio_input, chatbot],
-        outputs=[text_input, chatbot],
+        outputs=[chatbot],
         queue=False
     ).then(
         fn=bot_response,
         inputs=[text_input, audio_input, source_lang, target_lang, chatbot],
         outputs=chatbot,
     ).then(
-        fn=lambda: None,
+        fn=lambda: (gr.update(value=""), None),
         inputs=None,
-        outputs=audio_input, # Clear audio after send
+        outputs=[text_input, audio_input], # Clear text and audio after send
         queue=False
     )
     
     submit_btn.click(
         fn=user_message,
         inputs=[text_input, audio_input, chatbot],
-        outputs=[text_input, chatbot],
+        outputs=[chatbot],
         queue=False
     ).then(
         fn=bot_response,
         inputs=[text_input, audio_input, source_lang, target_lang, chatbot],
         outputs=chatbot,
     ).then(
-        fn=lambda: None,
+        fn=lambda: (gr.update(value=""), None),
         inputs=None,
-        outputs=audio_input, # Clear audio after send
+        outputs=[text_input, audio_input], # Clear text and audio after send
         queue=False
     )
 
