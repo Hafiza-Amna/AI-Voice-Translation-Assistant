@@ -108,18 +108,18 @@ audio {
 def user_message(text, audio_path, history):
     if audio_path:
         # Show audio in history
-        history.append(((audio_path,), None))
+        history.append({"role": "user", "content": gr.FileData(path=audio_path)})
     elif text:
-        history.append((text, None))
+        history.append({"role": "user", "content": text})
     return gr.update(value="", interactive=False), history
 
 def bot_response(text, audio_path, source_lang, target_lang, history):
     if not text and not audio_path:
-        history.append((None, "⚠️ Please provide text or audio input."))
+        history.append({"role": "assistant", "content": "⚠️ Please provide text or audio input."})
         return history
     
     if source_lang == target_lang:
-        history.append((None, "❌ Source and target languages must be different."))
+        history.append({"role": "assistant", "content": "❌ Source and target languages must be different."})
         return history
 
     try:
@@ -127,28 +127,28 @@ def bot_response(text, audio_path, source_lang, target_lang, history):
             # Full Pipeline
             transcription = transcribe_audio(audio_path)
             if not transcription:
-                history.append((None, "❌ No speech detected in the audio. Please try again."))
+                history.append({"role": "assistant", "content": "❌ No speech detected in the audio. Please try again."})
                 return history
             
             translation = translate_text(transcription, source_lang, target_lang)
             audio_out = synthesize_audio(translation, target_lang)
             
             response_md = f"📝 **Transcription:** {transcription}\n\n🌐 **Translation:** {translation}"
-            history.append((None, response_md))
+            history.append({"role": "assistant", "content": response_md})
             if audio_out:
-                history.append((None, (audio_out,)))
+                history.append({"role": "assistant", "content": gr.FileData(path=audio_out)})
         else:
             # Text Pipeline
             translation = translate_text(text, source_lang, target_lang)
             audio_out = synthesize_audio(translation, target_lang)
             
             response_md = f"🌐 **Translation:** {translation}"
-            history.append((None, response_md))
+            history.append({"role": "assistant", "content": response_md})
             if audio_out:
-                history.append((None, (audio_out,)))
+                history.append({"role": "assistant", "content": gr.FileData(path=audio_out)})
                 
     except Exception as e:
-        history.append((None, f"❌ Error: {str(e)}"))
+        history.append({"role": "assistant", "content": f"❌ Error: {str(e)}"})
         
     return history
 
@@ -232,4 +232,4 @@ with gr.Blocks(title="AI Voice Translation Assistant") as demo:
 # so __name__ == "__main__" is True and this block executes normally.
 # The css kwarg in launch() is required for Gradio 6.x custom styling.
 if __name__ == "__main__":
-    demo.queue().launch(css=custom_css)
+    demo.queue().launch(css=custom_css, show_error=True)
