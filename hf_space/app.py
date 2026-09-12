@@ -107,8 +107,10 @@ audio {
 
 def user_message(text, audio_path, history):
     if audio_path:
-        # Show audio in history
-        history.append({"role": "user", "content": gr.FileData(path=audio_path)})
+        # Show audio player inline in history (not a file download card)
+        history.append({"role": "user", "content": gr.Audio(
+            value=audio_path, type="filepath", sources=[], show_label=False
+        )})
     elif text:
         history.append({"role": "user", "content": text})
     return history
@@ -136,7 +138,10 @@ def bot_response(text, audio_path, source_lang, target_lang, history):
             response_md = f"📝 **Transcription:** {transcription}\n\n🌐 **Translation:** {translation}"
             history.append({"role": "assistant", "content": response_md})
             if audio_out:
-                history.append({"role": "assistant", "content": gr.FileData(path=audio_out)})
+                # Embed inline audio player (▶️ play + ⬇️ download)
+                history.append({"role": "assistant", "content": gr.Audio(
+                    value=audio_out, type="filepath", sources=[], show_label=False
+                )})
         else:
             # Text Pipeline
             translation = translate_text(text, source_lang, target_lang)
@@ -145,7 +150,10 @@ def bot_response(text, audio_path, source_lang, target_lang, history):
             response_md = f"🌐 **Translation:** {translation}"
             history.append({"role": "assistant", "content": response_md})
             if audio_out:
-                history.append({"role": "assistant", "content": gr.FileData(path=audio_out)})
+                # Embed inline audio player (▶️ play + ⬇️ download)
+                history.append({"role": "assistant", "content": gr.Audio(
+                    value=audio_out, type="filepath", sources=[], show_label=False
+                )})
                 
     except Exception as e:
         history.append({"role": "assistant", "content": f"❌ Error: {str(e)}"})
